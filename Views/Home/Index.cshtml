@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h1 style="">Agriculture Supply Chain Organization</h1>
+    <h2 style="margin-top:10px;">Empowering Farmers, Nurturing Tomorrow</h2>
+    <img src=""
+         alt="Image" class="responsive-image" />
+    <p style="margin-top: 10px; color:white;">Welcome to our website, we provide an administrator system that has to log in, to be able to view and perform create, update and delete operations on the lists of Farmers, Machineries, and many more.</p>
+
+    <div class="buttons">
+        <a href="@Url.Action("AdminLogin", "Home")" class="btn btn-primary">Admin Login</a>
+        <a href="@Url.Action("UserLogin", "Home")" class="btn btn-default btn-secondary">User Login</a>
+    </div>
+</div>
+
+<style>
+    body {
+        background-image: url('https://cdn.vectorstock.com/i/2000v/38/89/silhouettes-farm-landscape-rural-panorama-vector-24843889.avif');
+        background-size: auto;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .responsive-image {
+        width: 1000px;
+        height: 300px;
+        display: flex;
+        margin: auto;
+    }
+
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin: 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: #136cae;
+    }
+
+    .btn-secondary {
+        background-color: #0b790a;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b4f70;
+    }
+
+    .btn-secondary:hover {
+        background-color: #095d09;
+    }
+</style>

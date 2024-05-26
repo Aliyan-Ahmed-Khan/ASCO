@@ -1,0 +1,782 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBACSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admin_name" Type="varchar" MaxLength="20" />
+          <Property Name="admin_pass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Farmer">
+          <Key>
+            <PropertyRef Name="farmer_id" />
+          </Key>
+          <Property Name="farmer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_name" Type="varchar" MaxLength="20" />
+          <Property Name="farmer_address" Type="varchar" MaxLength="30" />
+          <Property Name="farmer_contact" Type="varchar" MaxLength="11" />
+          <Property Name="farmer_password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Farmer_Fertilizer_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_id" Type="int" />
+          <Property Name="fertilizer_id" Type="int" />
+          <Property Name="fertilizer_takendate" Type="date" />
+          <Property Name="not_valid_until" Type="date" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Farmer_Loan_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_id" Type="int" />
+          <Property Name="loan_id" Type="int" />
+          <Property Name="loan_takendate" Type="date" />
+          <Property Name="not_valid_until" Type="date" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Farmer_Machinery_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_id" Type="int" />
+          <Property Name="machinery_id" Type="int" />
+          <Property Name="machinery_takendate" Type="date" />
+          <Property Name="not_valid_until" Type="date" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Farmer_Seed_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_id" Type="int" />
+          <Property Name="seed_id" Type="int" />
+          <Property Name="seed_takendate" Type="date" />
+          <Property Name="not_valid_until" Type="date" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Farmer_Tool_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farmer_id" Type="int" />
+          <Property Name="tool_id" Type="int" />
+          <Property Name="tool_takendate" Type="date" />
+          <Property Name="not_valid_until" Type="date" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Fertilizer">
+          <Key>
+            <PropertyRef Name="fertilizer_id" />
+          </Key>
+          <Property Name="fertilizer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fertilizer_name" Type="varchar" MaxLength="20" />
+          <Property Name="fertilizer_company" Type="varchar" MaxLength="50" />
+          <Property Name="fertilizer_quality" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="loan_id" />
+          </Key>
+          <Property Name="loan_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loan_amount" Type="int" />
+        </EntityType>
+        <EntityType Name="Machinery">
+          <Key>
+            <PropertyRef Name="machinery_id" />
+          </Key>
+          <Property Name="machinery_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="machinery_type" Type="varchar" MaxLength="20" />
+          <Property Name="machine_manufacturer" Type="varchar" MaxLength="50" />
+          <Property Name="machinery_quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="provider_id" />
+          </Key>
+          <Property Name="provider_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_name" Type="varchar" MaxLength="30" />
+          <Property Name="provider_contact" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Seed">
+          <Key>
+            <PropertyRef Name="seed_id" />
+          </Key>
+          <Property Name="seed_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seed_name" Type="varchar" MaxLength="20" />
+          <Property Name="seed_company" Type="varchar" MaxLength="50" />
+          <Property Name="seed_quality" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="tool_id" />
+          </Key>
+          <Property Name="tool_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tool_name" Type="varchar" MaxLength="11" />
+          <Property Name="tool_manufacturer" Type="varchar" MaxLength="50" />
+          <Property Name="tool_quantity" Type="int" />
+        </EntityType>
+        <Association Name="FK__Farmer_Fe__farme__6A30C649">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Fertilizer_RS" Type="Self.Farmer_Fertilizer_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Fertilizer_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Fe__ferti__6B24EA82">
+          <End Role="Fertilizer" Type="Self.Fertilizer" Multiplicity="0..1" />
+          <End Role="Farmer_Fertilizer_RS" Type="Self.Farmer_Fertilizer_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fertilizer">
+              <PropertyRef Name="fertilizer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Fertilizer_RS">
+              <PropertyRef Name="fertilizer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Lo__farme__71D1E811">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Loan_RS" Type="Self.Farmer_Loan_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Loan_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Lo__loan___72C60C4A">
+          <End Role="Loan" Type="Self.Loan" Multiplicity="0..1" />
+          <End Role="Farmer_Loan_RS" Type="Self.Farmer_Loan_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loan">
+              <PropertyRef Name="loan_id" />
+            </Principal>
+            <Dependent Role="Farmer_Loan_RS">
+              <PropertyRef Name="loan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Ma__farme__5AEE82B9">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Machinery_RS" Type="Self.Farmer_Machinery_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Machinery_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Ma__machi__5BE2A6F2">
+          <End Role="Machinery" Type="Self.Machinery" Multiplicity="0..1" />
+          <End Role="Farmer_Machinery_RS" Type="Self.Farmer_Machinery_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machinery">
+              <PropertyRef Name="machinery_id" />
+            </Principal>
+            <Dependent Role="Farmer_Machinery_RS">
+              <PropertyRef Name="machinery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Se__farme__628FA481">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Seed_RS" Type="Self.Farmer_Seed_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Seed_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Se__seed___6383C8BA">
+          <End Role="Seed" Type="Self.Seed" Multiplicity="0..1" />
+          <End Role="Farmer_Seed_RS" Type="Self.Farmer_Seed_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seed">
+              <PropertyRef Name="seed_id" />
+            </Principal>
+            <Dependent Role="Farmer_Seed_RS">
+              <PropertyRef Name="seed_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_To__farme__52593CB8">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Tool_RS" Type="Self.Farmer_Tool_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Tool_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_To__tool___534D60F1">
+          <End Role="Tool" Type="Self.Tool" Multiplicity="0..1" />
+          <End Role="Farmer_Tool_RS" Type="Self.Farmer_Tool_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="tool_id" />
+            </Principal>
+            <Dependent Role="Farmer_Tool_RS">
+              <PropertyRef Name="tool_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBACSOModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer" EntityType="Self.Farmer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer_Fertilizer_RS" EntityType="Self.Farmer_Fertilizer_RS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer_Loan_RS" EntityType="Self.Farmer_Loan_RS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer_Machinery_RS" EntityType="Self.Farmer_Machinery_RS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer_Seed_RS" EntityType="Self.Farmer_Seed_RS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmer_Tool_RS" EntityType="Self.Farmer_Tool_RS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fertilizer" EntityType="Self.Fertilizer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machinery" EntityType="Self.Machinery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seed" EntityType="Self.Seed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tool" EntityType="Self.Tool" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Farmer_Fe__farme__6A30C649" Association="Self.FK__Farmer_Fe__farme__6A30C649">
+            <End Role="Farmer" EntitySet="Farmer" />
+            <End Role="Farmer_Fertilizer_RS" EntitySet="Farmer_Fertilizer_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Fe__ferti__6B24EA82" Association="Self.FK__Farmer_Fe__ferti__6B24EA82">
+            <End Role="Fertilizer" EntitySet="Fertilizer" />
+            <End Role="Farmer_Fertilizer_RS" EntitySet="Farmer_Fertilizer_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Lo__farme__71D1E811" Association="Self.FK__Farmer_Lo__farme__71D1E811">
+            <End Role="Farmer" EntitySet="Farmer" />
+            <End Role="Farmer_Loan_RS" EntitySet="Farmer_Loan_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Lo__loan___72C60C4A" Association="Self.FK__Farmer_Lo__loan___72C60C4A">
+            <End Role="Loan" EntitySet="Loan" />
+            <End Role="Farmer_Loan_RS" EntitySet="Farmer_Loan_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Ma__farme__5AEE82B9" Association="Self.FK__Farmer_Ma__farme__5AEE82B9">
+            <End Role="Farmer" EntitySet="Farmer" />
+            <End Role="Farmer_Machinery_RS" EntitySet="Farmer_Machinery_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Ma__machi__5BE2A6F2" Association="Self.FK__Farmer_Ma__machi__5BE2A6F2">
+            <End Role="Machinery" EntitySet="Machinery" />
+            <End Role="Farmer_Machinery_RS" EntitySet="Farmer_Machinery_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Se__farme__628FA481" Association="Self.FK__Farmer_Se__farme__628FA481">
+            <End Role="Farmer" EntitySet="Farmer" />
+            <End Role="Farmer_Seed_RS" EntitySet="Farmer_Seed_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Se__seed___6383C8BA" Association="Self.FK__Farmer_Se__seed___6383C8BA">
+            <End Role="Seed" EntitySet="Seed" />
+            <End Role="Farmer_Seed_RS" EntitySet="Farmer_Seed_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_To__farme__52593CB8" Association="Self.FK__Farmer_To__farme__52593CB8">
+            <End Role="Farmer" EntitySet="Farmer" />
+            <End Role="Farmer_Tool_RS" EntitySet="Farmer_Tool_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_To__tool___534D60F1" Association="Self.FK__Farmer_To__tool___534D60F1">
+            <End Role="Tool" EntitySet="Tool" />
+            <End Role="Farmer_Tool_RS" EntitySet="Farmer_Tool_RS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBACSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="admin_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Farmer">
+          <Key>
+            <PropertyRef Name="farmer_id" />
+          </Key>
+          <Property Name="farmer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="farmer_address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="farmer_contact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="farmer_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Farmer_Fertilizer_RS" Relationship="Self.FK__Farmer_Fe__farme__6A30C649" FromRole="Farmer" ToRole="Farmer_Fertilizer_RS" />
+          <NavigationProperty Name="Farmer_Loan_RS" Relationship="Self.FK__Farmer_Lo__farme__71D1E811" FromRole="Farmer" ToRole="Farmer_Loan_RS" />
+          <NavigationProperty Name="Farmer_Machinery_RS" Relationship="Self.FK__Farmer_Ma__farme__5AEE82B9" FromRole="Farmer" ToRole="Farmer_Machinery_RS" />
+          <NavigationProperty Name="Farmer_Seed_RS" Relationship="Self.FK__Farmer_Se__farme__628FA481" FromRole="Farmer" ToRole="Farmer_Seed_RS" />
+          <NavigationProperty Name="Farmer_Tool_RS" Relationship="Self.FK__Farmer_To__farme__52593CB8" FromRole="Farmer" ToRole="Farmer_Tool_RS" />
+        </EntityType>
+        <EntityType Name="Farmer_Fertilizer_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_id" Type="Int32" />
+          <Property Name="fertilizer_id" Type="Int32" />
+          <Property Name="fertilizer_takendate" Type="DateTime" Precision="0" />
+          <Property Name="not_valid_until" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <NavigationProperty Name="Farmer" Relationship="Self.FK__Farmer_Fe__farme__6A30C649" FromRole="Farmer_Fertilizer_RS" ToRole="Farmer" />
+          <NavigationProperty Name="Fertilizer" Relationship="Self.FK__Farmer_Fe__ferti__6B24EA82" FromRole="Farmer_Fertilizer_RS" ToRole="Fertilizer" />
+        </EntityType>
+        <EntityType Name="Farmer_Loan_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_id" Type="Int32" />
+          <Property Name="loan_id" Type="Int32" />
+          <Property Name="loan_takendate" Type="DateTime" Precision="0" />
+          <Property Name="not_valid_until" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <NavigationProperty Name="Farmer" Relationship="Self.FK__Farmer_Lo__farme__71D1E811" FromRole="Farmer_Loan_RS" ToRole="Farmer" />
+          <NavigationProperty Name="Loan" Relationship="Self.FK__Farmer_Lo__loan___72C60C4A" FromRole="Farmer_Loan_RS" ToRole="Loan" />
+        </EntityType>
+        <EntityType Name="Farmer_Machinery_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_id" Type="Int32" />
+          <Property Name="machinery_id" Type="Int32" />
+          <Property Name="machinery_takendate" Type="DateTime" Precision="0" />
+          <Property Name="not_valid_until" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <NavigationProperty Name="Farmer" Relationship="Self.FK__Farmer_Ma__farme__5AEE82B9" FromRole="Farmer_Machinery_RS" ToRole="Farmer" />
+          <NavigationProperty Name="Machinery" Relationship="Self.FK__Farmer_Ma__machi__5BE2A6F2" FromRole="Farmer_Machinery_RS" ToRole="Machinery" />
+        </EntityType>
+        <EntityType Name="Farmer_Seed_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_id" Type="Int32" />
+          <Property Name="seed_id" Type="Int32" />
+          <Property Name="seed_takendate" Type="DateTime" Precision="0" />
+          <Property Name="not_valid_until" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <NavigationProperty Name="Farmer" Relationship="Self.FK__Farmer_Se__farme__628FA481" FromRole="Farmer_Seed_RS" ToRole="Farmer" />
+          <NavigationProperty Name="Seed" Relationship="Self.FK__Farmer_Se__seed___6383C8BA" FromRole="Farmer_Seed_RS" ToRole="Seed" />
+        </EntityType>
+        <EntityType Name="Farmer_Tool_RS">
+          <Key>
+            <PropertyRef Name="relationship_id" />
+          </Key>
+          <Property Name="relationship_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farmer_id" Type="Int32" />
+          <Property Name="tool_id" Type="Int32" />
+          <Property Name="tool_takendate" Type="DateTime" Precision="0" />
+          <Property Name="not_valid_until" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <NavigationProperty Name="Farmer" Relationship="Self.FK__Farmer_To__farme__52593CB8" FromRole="Farmer_Tool_RS" ToRole="Farmer" />
+          <NavigationProperty Name="Tool" Relationship="Self.FK__Farmer_To__tool___534D60F1" FromRole="Farmer_Tool_RS" ToRole="Tool" />
+        </EntityType>
+        <EntityType Name="Fertilizer">
+          <Key>
+            <PropertyRef Name="fertilizer_id" />
+          </Key>
+          <Property Name="fertilizer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fertilizer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fertilizer_company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fertilizer_quality" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Farmer_Fertilizer_RS" Relationship="Self.FK__Farmer_Fe__ferti__6B24EA82" FromRole="Fertilizer" ToRole="Farmer_Fertilizer_RS" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="loan_id" />
+          </Key>
+          <Property Name="loan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loan_amount" Type="Int32" />
+          <NavigationProperty Name="Farmer_Loan_RS" Relationship="Self.FK__Farmer_Lo__loan___72C60C4A" FromRole="Loan" ToRole="Farmer_Loan_RS" />
+        </EntityType>
+        <EntityType Name="Machinery">
+          <Key>
+            <PropertyRef Name="machinery_id" />
+          </Key>
+          <Property Name="machinery_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="machinery_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="machine_manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="machinery_quantity" Type="Int32" />
+          <NavigationProperty Name="Farmer_Machinery_RS" Relationship="Self.FK__Farmer_Ma__machi__5BE2A6F2" FromRole="Machinery" ToRole="Farmer_Machinery_RS" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="provider_id" />
+          </Key>
+          <Property Name="provider_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provider_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="provider_contact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Seed">
+          <Key>
+            <PropertyRef Name="seed_id" />
+          </Key>
+          <Property Name="seed_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seed_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="seed_company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="seed_quality" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Farmer_Seed_RS" Relationship="Self.FK__Farmer_Se__seed___6383C8BA" FromRole="Seed" ToRole="Farmer_Seed_RS" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="tool_id" />
+          </Key>
+          <Property Name="tool_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tool_name" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="tool_manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tool_quantity" Type="Int32" />
+          <NavigationProperty Name="Farmer_Tool_RS" Relationship="Self.FK__Farmer_To__tool___534D60F1" FromRole="Tool" ToRole="Farmer_Tool_RS" />
+        </EntityType>
+        <Association Name="FK__Farmer_Fe__farme__6A30C649">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Fertilizer_RS" Type="Self.Farmer_Fertilizer_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Fertilizer_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Lo__farme__71D1E811">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Loan_RS" Type="Self.Farmer_Loan_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Loan_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Ma__farme__5AEE82B9">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Machinery_RS" Type="Self.Farmer_Machinery_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Machinery_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Se__farme__628FA481">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Seed_RS" Type="Self.Farmer_Seed_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Seed_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_To__farme__52593CB8">
+          <End Role="Farmer" Type="Self.Farmer" Multiplicity="0..1" />
+          <End Role="Farmer_Tool_RS" Type="Self.Farmer_Tool_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="farmer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Tool_RS">
+              <PropertyRef Name="farmer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Fe__ferti__6B24EA82">
+          <End Role="Fertilizer" Type="Self.Fertilizer" Multiplicity="0..1" />
+          <End Role="Farmer_Fertilizer_RS" Type="Self.Farmer_Fertilizer_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fertilizer">
+              <PropertyRef Name="fertilizer_id" />
+            </Principal>
+            <Dependent Role="Farmer_Fertilizer_RS">
+              <PropertyRef Name="fertilizer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Lo__loan___72C60C4A">
+          <End Role="Loan" Type="Self.Loan" Multiplicity="0..1" />
+          <End Role="Farmer_Loan_RS" Type="Self.Farmer_Loan_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loan">
+              <PropertyRef Name="loan_id" />
+            </Principal>
+            <Dependent Role="Farmer_Loan_RS">
+              <PropertyRef Name="loan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Ma__machi__5BE2A6F2">
+          <End Role="Machinery" Type="Self.Machinery" Multiplicity="0..1" />
+          <End Role="Farmer_Machinery_RS" Type="Self.Farmer_Machinery_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machinery">
+              <PropertyRef Name="machinery_id" />
+            </Principal>
+            <Dependent Role="Farmer_Machinery_RS">
+              <PropertyRef Name="machinery_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_Se__seed___6383C8BA">
+          <End Role="Seed" Type="Self.Seed" Multiplicity="0..1" />
+          <End Role="Farmer_Seed_RS" Type="Self.Farmer_Seed_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seed">
+              <PropertyRef Name="seed_id" />
+            </Principal>
+            <Dependent Role="Farmer_Seed_RS">
+              <PropertyRef Name="seed_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmer_To__tool___534D60F1">
+          <End Role="Tool" Type="Self.Tool" Multiplicity="0..1" />
+          <End Role="Farmer_Tool_RS" Type="Self.Farmer_Tool_RS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="tool_id" />
+            </Principal>
+            <Dependent Role="Farmer_Tool_RS">
+              <PropertyRef Name="tool_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBACSOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Farmers" EntityType="Self.Farmer" />
+          <EntitySet Name="Farmer_Fertilizer_RS" EntityType="Self.Farmer_Fertilizer_RS" />
+          <EntitySet Name="Farmer_Loan_RS" EntityType="Self.Farmer_Loan_RS" />
+          <EntitySet Name="Farmer_Machinery_RS" EntityType="Self.Farmer_Machinery_RS" />
+          <EntitySet Name="Farmer_Seed_RS" EntityType="Self.Farmer_Seed_RS" />
+          <EntitySet Name="Farmer_Tool_RS" EntityType="Self.Farmer_Tool_RS" />
+          <EntitySet Name="Fertilizers" EntityType="Self.Fertilizer" />
+          <EntitySet Name="Loans" EntityType="Self.Loan" />
+          <EntitySet Name="Machineries" EntityType="Self.Machinery" />
+          <EntitySet Name="Providers" EntityType="Self.Provider" />
+          <EntitySet Name="Seeds" EntityType="Self.Seed" />
+          <EntitySet Name="Tools" EntityType="Self.Tool" />
+          <AssociationSet Name="FK__Farmer_Fe__farme__6A30C649" Association="Self.FK__Farmer_Fe__farme__6A30C649">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Farmer_Fertilizer_RS" EntitySet="Farmer_Fertilizer_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Lo__farme__71D1E811" Association="Self.FK__Farmer_Lo__farme__71D1E811">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Farmer_Loan_RS" EntitySet="Farmer_Loan_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Ma__farme__5AEE82B9" Association="Self.FK__Farmer_Ma__farme__5AEE82B9">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Farmer_Machinery_RS" EntitySet="Farmer_Machinery_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Se__farme__628FA481" Association="Self.FK__Farmer_Se__farme__628FA481">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Farmer_Seed_RS" EntitySet="Farmer_Seed_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_To__farme__52593CB8" Association="Self.FK__Farmer_To__farme__52593CB8">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Farmer_Tool_RS" EntitySet="Farmer_Tool_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Fe__ferti__6B24EA82" Association="Self.FK__Farmer_Fe__ferti__6B24EA82">
+            <End Role="Fertilizer" EntitySet="Fertilizers" />
+            <End Role="Farmer_Fertilizer_RS" EntitySet="Farmer_Fertilizer_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Lo__loan___72C60C4A" Association="Self.FK__Farmer_Lo__loan___72C60C4A">
+            <End Role="Loan" EntitySet="Loans" />
+            <End Role="Farmer_Loan_RS" EntitySet="Farmer_Loan_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Ma__machi__5BE2A6F2" Association="Self.FK__Farmer_Ma__machi__5BE2A6F2">
+            <End Role="Machinery" EntitySet="Machineries" />
+            <End Role="Farmer_Machinery_RS" EntitySet="Farmer_Machinery_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_Se__seed___6383C8BA" Association="Self.FK__Farmer_Se__seed___6383C8BA">
+            <End Role="Seed" EntitySet="Seeds" />
+            <End Role="Farmer_Seed_RS" EntitySet="Farmer_Seed_RS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmer_To__tool___534D60F1" Association="Self.FK__Farmer_To__tool___534D60F1">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="Farmer_Tool_RS" EntitySet="Farmer_Tool_RS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBACSOModelStoreContainer" CdmEntityContainer="DBACSOEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DBACSOModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_name" ColumnName="admin_name" />
+                <ScalarProperty Name="admin_pass" ColumnName="admin_pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmers">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer">
+              <MappingFragment StoreEntitySet="Farmer">
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="farmer_name" ColumnName="farmer_name" />
+                <ScalarProperty Name="farmer_address" ColumnName="farmer_address" />
+                <ScalarProperty Name="farmer_contact" ColumnName="farmer_contact" />
+                <ScalarProperty Name="farmer_password" ColumnName="farmer_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmer_Fertilizer_RS">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer_Fertilizer_RS">
+              <MappingFragment StoreEntitySet="Farmer_Fertilizer_RS">
+                <ScalarProperty Name="relationship_id" ColumnName="relationship_id" />
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="fertilizer_id" ColumnName="fertilizer_id" />
+                <ScalarProperty Name="fertilizer_takendate" ColumnName="fertilizer_takendate" />
+                <ScalarProperty Name="not_valid_until" ColumnName="not_valid_until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmer_Loan_RS">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer_Loan_RS">
+              <MappingFragment StoreEntitySet="Farmer_Loan_RS">
+                <ScalarProperty Name="relationship_id" ColumnName="relationship_id" />
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+                <ScalarProperty Name="loan_takendate" ColumnName="loan_takendate" />
+                <ScalarProperty Name="not_valid_until" ColumnName="not_valid_until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmer_Machinery_RS">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer_Machinery_RS">
+              <MappingFragment StoreEntitySet="Farmer_Machinery_RS">
+                <ScalarProperty Name="relationship_id" ColumnName="relationship_id" />
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="machinery_id" ColumnName="machinery_id" />
+                <ScalarProperty Name="machinery_takendate" ColumnName="machinery_takendate" />
+                <ScalarProperty Name="not_valid_until" ColumnName="not_valid_until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmer_Seed_RS">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer_Seed_RS">
+              <MappingFragment StoreEntitySet="Farmer_Seed_RS">
+                <ScalarProperty Name="relationship_id" ColumnName="relationship_id" />
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="seed_id" ColumnName="seed_id" />
+                <ScalarProperty Name="seed_takendate" ColumnName="seed_takendate" />
+                <ScalarProperty Name="not_valid_until" ColumnName="not_valid_until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmer_Tool_RS">
+            <EntityTypeMapping TypeName="DBACSOModel.Farmer_Tool_RS">
+              <MappingFragment StoreEntitySet="Farmer_Tool_RS">
+                <ScalarProperty Name="relationship_id" ColumnName="relationship_id" />
+                <ScalarProperty Name="farmer_id" ColumnName="farmer_id" />
+                <ScalarProperty Name="tool_id" ColumnName="tool_id" />
+                <ScalarProperty Name="tool_takendate" ColumnName="tool_takendate" />
+                <ScalarProperty Name="not_valid_until" ColumnName="not_valid_until" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fertilizers">
+            <EntityTypeMapping TypeName="DBACSOModel.Fertilizer">
+              <MappingFragment StoreEntitySet="Fertilizer">
+                <ScalarProperty Name="fertilizer_id" ColumnName="fertilizer_id" />
+                <ScalarProperty Name="fertilizer_name" ColumnName="fertilizer_name" />
+                <ScalarProperty Name="fertilizer_company" ColumnName="fertilizer_company" />
+                <ScalarProperty Name="fertilizer_quality" ColumnName="fertilizer_quality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="DBACSOModel.Loan">
+              <MappingFragment StoreEntitySet="Loan">
+                <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+                <ScalarProperty Name="loan_amount" ColumnName="loan_amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machineries">
+            <EntityTypeMapping TypeName="DBACSOModel.Machinery">
+              <MappingFragment StoreEntitySet="Machinery">
+                <ScalarProperty Name="machinery_id" ColumnName="machinery_id" />
+                <ScalarProperty Name="machinery_type" ColumnName="machinery_type" />
+                <ScalarProperty Name="machine_manufacturer" ColumnName="machine_manufacturer" />
+                <ScalarProperty Name="machinery_quantity" ColumnName="machinery_quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="DBACSOModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+                <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+                <ScalarProperty Name="provider_contact" ColumnName="provider_contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seeds">
+            <EntityTypeMapping TypeName="DBACSOModel.Seed">
+              <MappingFragment StoreEntitySet="Seed">
+                <ScalarProperty Name="seed_id" ColumnName="seed_id" />
+                <ScalarProperty Name="seed_name" ColumnName="seed_name" />
+                <ScalarProperty Name="seed_company" ColumnName="seed_company" />
+                <ScalarProperty Name="seed_quality" ColumnName="seed_quality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="DBACSOModel.Tool">
+              <MappingFragment StoreEntitySet="Tool">
+                <ScalarProperty Name="tool_id" ColumnName="tool_id" />
+                <ScalarProperty Name="tool_name" ColumnName="tool_name" />
+                <ScalarProperty Name="tool_manufacturer" ColumnName="tool_manufacturer" />
+                <ScalarProperty Name="tool_quantity" ColumnName="tool_quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

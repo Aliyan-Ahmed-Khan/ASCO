@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >@ViewBag.Title - Project by Aliyan & Hira</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Agriculture Supply Chain Organization", "Index", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <style>
+                .navbar-nav {
+                    display: flex;
+                    align-items: center; /* Align items vertically in the center */
+                    float: right; /* Ensure the float is applied */
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                .nav-item {
+                    margin: 0 10px; /* Adjust spacing between items as needed */
+                }
+
+                .nav-text {
+                    color: #fff;
+                    margin: 0; /* Reset default margin */
+                    line-height: 1.5; /* Align properly with link */
+                    display: flex;
+                    align-items: center; /* Center align text */
+                }
+
+                .custom-link {
+                    color: #fff !important; /* White color for the link */
+                    text-decoration: none; /* Remove underline */
+                    display: flex;
+                    align-items: center; /* Center align link */
+                }
+
+                    .custom-link:hover {
+                        color: #ddd; /* Slightly different color on hover */
+                        background-color: red;
+                    }
+            </style>
+            <ul class="navbar-nav" style="float: right !important">
+                @if (Session["admin_name"] != null)
+                {
+                    <li class="nav-item"><span class="nav-text">Hello @Session["admin_name"] </span></li>
+                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                }
+            </ul>
+
+            <ul class="navbar-nav" style="float: right">
+                @if (Session["farmer_name"] != null)
+                {
+                    <li class="nav-item"><span class="nav-text">Hello @Session["farmer_name"] </span></li>
+                    <li class="nav-item">@Html.ActionLink("Logout", "LogoutUser", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                }
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align: right; text-align:end;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ASCO.Models.Seed>
+
+@{
+    ViewBag.Title = "ListSeeds";
+}
+
+<h2>List Seeds</h2>
+
+<p>
+    @Html.ActionLink("Add New", "ListSeedsCreate", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.seed_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seed_company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seed_quality)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.seed_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seed_company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seed_quality)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ListSeedsEdit", new { id = item.seed_id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "ListSeedsDelete", new { id = item.seed_id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Main Page", "AdminPage", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}

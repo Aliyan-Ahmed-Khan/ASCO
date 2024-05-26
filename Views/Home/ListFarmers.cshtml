@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ASCO.Models.Farmer>
+
+@{
+    ViewBag.Title = "ListFarmers";
+}
+
+<h2>ListFarmers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ListFarmersCreate", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.farmer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.farmer_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.farmer_contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.farmer_password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.farmer_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.farmer_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.farmer_contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.farmer_password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ListFarmersEdit", new { id = item.farmer_id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "ListFarmersDelete", new { id = item.farmer_id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Main Page", "AdminPage", null, new { @class = "btn btn-primary" })
+</div>

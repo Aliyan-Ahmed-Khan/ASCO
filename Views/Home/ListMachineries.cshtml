@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASCO.Models.Machinery>
+
+@{
+    ViewBag.Title = "ListMachineries";
+}
+
+<h2>List Machineries</h2>
+
+<p>
+    @Html.ActionLink("Add New", "ListMachineriesCreate", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.machinery_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.machine_manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.machinery_quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.machinery_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.machine_manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.machinery_quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ListMachineriesEdit", new { id = item.machinery_id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Delete", "ListMachineriesDelete", new { id = item.machinery_id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Main Page", "AdminPage", null, new { @class = "btn btn-primary" })
+</div>

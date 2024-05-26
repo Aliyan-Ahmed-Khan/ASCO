@@ -1,0 +1,131 @@
+﻿@model ASCO.Models.Admin
+
+@{
+    ViewBag.Title = "AdminLogin";
+}
+
+<h2 style="margin-top:30px;" class="title">Administrator Login</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal login-container">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.admin_name, htmlAttributes: new { @class = "control-label col-md-12 text-center" })
+            <div style="margin-left:75px; "class="col-md-12 text-center">
+                @Html.EditorFor(model => model.admin_name, new { htmlAttributes = new { @class = "form-control custom-input" } })
+                @Html.ValidationMessageFor(model => model.admin_name, "", new { @class = "text-danger text-center" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.admin_pass, htmlAttributes: new { @class = "control-label col-md-12 text-center" })
+            <div style="margin-left:75px; "class="col-md-12 text-center">
+                @Html.EditorFor(model => model.admin_pass, new { htmlAttributes = new { @class = "form-control custom-input" } })
+                @Html.ValidationMessageFor(model => model.admin_pass, "", new { @class = "text-danger text-center" })
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Login" class="btn btn-default custom-button" />
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <div class="col-md-12 text-center">
+                <label>@ViewBag.Notification</label>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        alert("@TempData["ErrorMessage"]");
+    </script>
+}
+
+<style>
+    body {
+        background-image: url('https://cdn.vectorstock.com/i/2000v/38/89/silhouettes-farm-landscape-rural-panorama-vector-24843889.avif'); /* Replace with your direct image URL */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+        background: rgba(255, 255, 255, 0.8);
+        background-image: url('https://cdn.vectorstock.com/i/2000v/38/89/silhouettes-farm-landscape-rural-panorama-vector-24843889.avif'); /* Same image URL */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 10%;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-horizontal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .control-label {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .custom-input {
+        width: 80%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .custom-button {
+        width: 80%;
+        border: 2px solid green;
+        background-color: green;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        .custom-button:hover {
+            background-color: darkgreen;
+        }
+
+    .text-danger {
+        color: red;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
