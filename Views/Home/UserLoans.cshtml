@@ -1,4 +1,5 @@
-﻿@model List<ASCO.Models.Loan>
+﻿
+@model List<ASCO.Models.Loan>
 
 @{
     ViewBag.Title = "Your Loan Requests";
@@ -25,3 +26,15 @@
         }
     </tbody>
 </table>
+
+
+<div style="margin-top: 20px;">
+    @Html.ActionLink("Back to Main Page", "UserPage", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}

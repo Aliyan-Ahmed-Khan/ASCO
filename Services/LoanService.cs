@@ -65,7 +65,16 @@ namespace ASCO.Services
 
         public List<Loan> GetPendingLoans()
         {
-            return db.Loans.Where(l => l.status == "Pending").ToList();
+            var pendingLoans = db.Loans
+                    .Join(db.Farmer_Loan_RS,
+                    loan => loan.loan_id,  // Assuming `Loan` table has a primary key `Id`
+                    flr => flr.loan_id,  // Assuming `Farmer_Loan_RS` table has a foreign key `LoanId`
+                    (loan, flr) => new { Loan = loan, FarmerLoanRS = flr })
+                    .Where(joined => joined.Loan.status == "Pending" && joined.FarmerLoanRS.farmer_id != null)
+                    .Select(joined => joined.Loan)
+                    .ToList();
+
+            return pendingLoans;
         }
 
         public bool UpdateLoanStatus(int loanId, string status, out string errorMessage)

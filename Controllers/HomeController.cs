@@ -376,7 +376,6 @@ namespace ASCO.Controllers
         }
 
 
-
         public ActionResult RequestLoan()
         {
             return View(new LoanRequestViewModel());
@@ -386,6 +385,7 @@ namespace ASCO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RequestLoan(LoanRequestViewModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -393,7 +393,21 @@ namespace ASCO.Controllers
 
             try
             {
+                //Session["farmer_id"] = model.farmer_id.ToString();
                 string errorMessage;
+
+                // Check if the farmer has an existing request and retrieve the not_valid_until date
+                var farmerLoan = db.Farmer_Loan_RS
+                                  .Where(flr => flr.farmer_id == model.farmer_id)
+                                  .OrderByDescending(flr => flr.loan_takendate)
+                                  .FirstOrDefault();
+
+                if (farmerLoan != null && farmerLoan.not_valid_until > DateTime.Now)
+                {
+                    TempData["Message"] = $"You have already made your request before, you can make another request after {farmerLoan.not_valid_until:MMMM dd, yyyy}";
+                    return RedirectToAction("UserLoans", "Home", new { farmerId = model.farmer_id });
+                }
+
                 if (loanService.RequestLoan(model, out errorMessage))
                 {
                     TempData["Message"] = "A request was made successfully";
@@ -401,19 +415,19 @@ namespace ASCO.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "There was some error while making your request, or you have already made your request before";
+                    TempData["Message"] = "You have already made your request before, you can make another request in 6 months time after your previous request";
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-
                 TempData["Message"] = "Failed to make your request: " + ex.Message;
                 return View(model);
             }
 
             return View(model);
         }
+
 
         public ActionResult RequestList()
         {
