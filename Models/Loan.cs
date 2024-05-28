@@ -23,6 +23,8 @@ namespace ASCO.Models
     
         public int loan_id { get; set; }
         public Nullable<int> loan_amount { get; set; }
+
+        public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Farmer_Loan_RS> Farmer_Loan_RS { get; set; }

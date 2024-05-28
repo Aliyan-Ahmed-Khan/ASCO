@@ -1,4 +1,6 @@
 ﻿
+@model ASCO.Models.LoanRequestViewModel
+
 @{
     ViewBag.Title = "RequestLoan";
 }
@@ -11,8 +13,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <label for="farmer_id">Farmer ID:</label>
-        <input type="number" name="farmer_id" id="farmer_id" class="form-control" />
+        @Html.LabelFor(model => model.farmer_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.farmer_id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.farmer_id, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -25,10 +30,17 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 }
 
+<div style="margin-top: 20px;">
+    @Html.ActionLink("Back to Main Page", "UserPage", null, new { @class = "btn btn-primary" })
+</div>
+
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-info">
-        @TempData["Message"]
-    </div>
+    <script>
+        alert("@TempData["Message"]");
+    </script>
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title >@ViewBag.Title - Project by Aliyan & Hira</title>
+    <title>@ViewBag.Title - Project by Aliyan & Hira</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="background-image: url('https://cdn.vectorstock.com/i/2000v/38/89/silhouettes-farm-landscape-rural-panorama-vector-24843889.avif'); background-size: auto; background-repeat: no-repeat; background-attachment: fixed;">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("Agriculture Supply Chain Organization", "Index", new { area = "" }, new { @class = "navbar-brand" })
@@ -19,8 +19,7 @@
             <style>
                 .navbar-nav {
                     display: flex;
-                    align-items: center; /* Align items vertically in the center */
-                    float: right; /* Ensure the float is applied */
+                    align-items: center;
                     margin: 0;
                     padding: 0;
                     list-style: none;
@@ -28,6 +27,7 @@
 
                 .nav-item {
                     margin: 0 10px; /* Adjust spacing between items as needed */
+                    float: right;
                 }
 
                 .nav-text {
@@ -42,7 +42,7 @@
                     color: #fff !important; /* White color for the link */
                     text-decoration: none; /* Remove underline */
                     display: flex;
-                    align-items: center; /* Center align link */
+                    align-items: center;
                 }
 
                     .custom-link:hover {
@@ -50,7 +50,8 @@
                         background-color: red;
                     }
             </style>
-            <ul class="navbar-nav" style="float: right !important">
+
+            <ul class="navbar-nav ml-auto">
                 @if (Session["admin_name"] != null)
                 {
                     <li class="nav-item"><span class="nav-text">Hello @Session["admin_name"] </span></li>
@@ -58,7 +59,7 @@
                 }
             </ul>
 
-            <ul class="navbar-nav" style="float: right">
+            <ul class="navbar-nav ml-auto">
                 @if (Session["farmer_name"] != null)
                 {
                     <li class="nav-item"><span class="nav-text">Hello @Session["farmer_name"] </span></li>
@@ -71,7 +72,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align: right; text-align:end;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
+            <p style="text-align: right;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
         </footer>
     </div>
 

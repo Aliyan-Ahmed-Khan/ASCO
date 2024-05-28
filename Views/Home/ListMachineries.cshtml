@@ -4,9 +4,14 @@
     ViewBag.Title = "ListMachineries";
 }
 
-<h2>List Machineries</h2>
+<h2 style="margin-top: 10px;">List of Machineries</h2>
 
-<p>
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #b8dfe8;
+    }
+</style>
+<p style="margin-top: 20px;">
     @Html.ActionLink("Add New", "ListMachineriesCreate", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table table-hover table-responsive">

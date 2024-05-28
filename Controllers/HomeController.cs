@@ -12,7 +12,7 @@ namespace ASCO.Controllers
         DBACSOEntities db = new DBACSOEntities();
         Models.DBACSOEntities entity = new DBACSOEntities();
 
-        private LoanService loanService = new LoanService();
+        public LoanService loanService = new LoanService();
 
         // GET: Home
         public ActionResult Index()
@@ -81,13 +81,13 @@ namespace ASCO.Controllers
             {
                 db.Farmers.Add(farmer);
                 db.SaveChanges();
-                TempData["Affirmation"] = "A user for farmer was created succesfully";
+                TempData["Message"] = "A user for farmer was created succesfully";
                 return RedirectToAction("ListFarmers", "Home");
 
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Failed to create a user " + ex.Message;
+                TempData["Message"] = "Failed to create a user " + ex.Message;
                 return View(farmer);
             }
         }
@@ -109,13 +109,13 @@ namespace ASCO.Controllers
             try
             {
                 db.Entry(f).State = EntityState.Modified;
-                TempData["UpdateMessage"] = "Data Updated Succesfully!";
+                TempData["Message"] = "Data Updated Succesfully!";
                 db.SaveChanges();
                 return RedirectToAction("ListFarmers", "Home");
             }
             catch (Exception ex)
             {
-                TempData["UpdateError"] = "Failed to update data: " + ex.Message;
+                TempData["Message"] = "Failed to update data: " + ex.Message;
                 return View();
             }
         }
@@ -376,27 +376,32 @@ namespace ASCO.Controllers
         }
 
 
+
         public ActionResult RequestLoan()
         {
             return View(new LoanRequestViewModel());
         }
 
-        // POST: Home/RequestLoan
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RequestLoan(LoanRequestViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             try
             {
                 string errorMessage;
                 if (loanService.RequestLoan(model, out errorMessage))
                 {
                     TempData["Message"] = "A request was made successfully";
-                    return RedirectToAction("UserPage", "Home");
+                    return RedirectToAction("UserLoans", "Home", new { farmerId = model.farmer_id });
                 }
                 else
                 {
-                    TempData["Message"] = errorMessage;
+                    TempData["Message"] = "There was some error while making your request, or you have already made your request before";
                 }
             }
             catch (Exception ex)
@@ -410,11 +415,50 @@ namespace ASCO.Controllers
             return View(model);
         }
 
-
         public ActionResult RequestList()
         {
-            // Implement the logic to list requests
-            return View();
+            var model = loanService.GetPendingLoans();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApproveLoan(int loanId)
+        {
+            string errorMessage;
+            if (loanService.UpdateLoanStatus(loanId, "Approved", out errorMessage))
+            {
+                TempData["Message"] = "Loan approved successfully.";
+            }
+            else
+            {
+                TempData["Message"] = errorMessage;
+            }
+
+            return RedirectToAction("RequestList", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DenyLoan(int loanId)
+        {
+            string errorMessage;
+            if (loanService.UpdateLoanStatus(loanId, "Denied", out errorMessage))
+            {
+                TempData["Message"] = "Loan denied successfully.";
+            }
+            else
+            {
+                TempData["Message"] = errorMessage;
+            }
+
+            return RedirectToAction("RequestList", "Home");
+        }
+
+        public ActionResult UserLoans(int farmerId)
+        {
+            var model = loanService.GetLoansByFarmer(farmerId);
+            return View(model);
         }
     }
 }

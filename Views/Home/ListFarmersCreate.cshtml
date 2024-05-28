@@ -4,7 +4,7 @@
     ViewBag.Title = "ListFarmersCreate";
 }
 
-<h2>ListFarmers Create</h2>
+<h2>Add a new Farmer</h2>
 
 
 @using (Html.BeginForm())
@@ -78,23 +78,9 @@
 }
 
 <div style ="margin-top: 20px;">
-    @Html.ActionLink("Back to List", "ListFarmers", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to Main Page", "AdminPage", null, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
-
-@if (TempData["Affirmation"] != null)
-{
-    <script>
-        alert("@TempData["Affirmation"]");
-    </script>
-}
-
-@if (TempData["Error"] != null)
-{
-    <script>
-        alert("@TempData["Error"]");
-    </script>
 }

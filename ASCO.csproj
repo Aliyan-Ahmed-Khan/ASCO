@@ -274,6 +274,8 @@
     <Content Include="Views\Home\UserLogin.cshtml" />
     <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Home\RequestLoan.cshtml" />
+    <Content Include="Views\Home\RequestList.cshtml" />
+    <Content Include="Views\Home\UserLoans.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

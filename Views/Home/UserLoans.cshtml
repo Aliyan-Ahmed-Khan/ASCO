@@ -1,0 +1,27 @@
+﻿@model List<ASCO.Models.Loan>
+
+@{
+    ViewBag.Title = "Your Loan Requests";
+}
+
+<h2>Your Loan Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Loan Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.loan_id</td>
+                <td>@loan.loan_amount</td>
+                <td>@loan.status</td>
+            </tr>
+        }
+    </tbody>
+</table>

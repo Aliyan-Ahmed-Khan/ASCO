@@ -4,9 +4,14 @@
     ViewBag.Title = "ListSeeds";
 }
 
-<h2>List Seeds</h2>
+<h2 style="margin-top: 10px;">List of Seeds</h2>
 
-<p>
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #b8dfe8;
+    }
+</style>
+<p style="margin-top: 20px;">
     @Html.ActionLink("Add New", "ListSeedsCreate", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table table-hover table-responsive">
