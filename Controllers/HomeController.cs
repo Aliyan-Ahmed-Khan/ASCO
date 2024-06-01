@@ -364,17 +364,10 @@ namespace ASCO.Controllers
             return View();
         }
 
-        public ActionResult LogoutUser()
-        {
-            Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
-
         public ActionResult UserPage()
         {
             return View();
         }
-
 
         public ActionResult RequestLoan()
         {
@@ -415,7 +408,7 @@ namespace ASCO.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "You have already made your request before, you can make another request in 6 months time after your previous request";
+                    TempData["Message"] = $"You have already made your request before, you can make another request after {farmerLoan.not_valid_until:MMMM dd, yyyy}";
                 }
             }
             catch (Exception ex)
@@ -427,7 +420,6 @@ namespace ASCO.Controllers
 
             return View(model);
         }
-
 
         public ActionResult RequestList()
         {
@@ -474,5 +466,104 @@ namespace ASCO.Controllers
             var model = loanService.GetLoansByFarmer(farmerId);
             return View(model);
         }
+
+
+
+        //private readonly RequestService requestService = new RequestService();
+
+        //public ActionResult RequestMachinery()
+        //{
+        //    return View(new MachineryRequestViewModel());
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult RequestMachinery(MachineryRequestViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    try
+        //    {
+        //        string errorMessage;
+
+        //        var farmerMachinery = db.Farmer_Machinery_RS
+        //                              .Where(fmr => fmr.farmer_id == model.farmer_id)
+        //                              .OrderByDescending(fmr => fmr.machinery_takendate)
+        //                              .FirstOrDefault();
+
+        //        if (farmerMachinery != null && farmerMachinery.not_valid_until > DateTime.Now)
+        //        {
+        //            TempData["Message"] = $"You have already requested machinery before. You can make another request after {farmerMachinery.not_valid_until:MMMM dd, yyyy}";
+        //            return RedirectToAction("UserMachineries", "Home", new { farmerId = model.farmer_id });
+        //        }
+
+        //        if (requestService.RequestMachinery(model, out errorMessage))
+        //        {
+        //            TempData["Message"] = "A request was made successfully";
+        //            return RedirectToAction("UserMachineries", "Home", new { farmerId = model.farmer_id });
+        //        }
+        //        else
+        //        {
+        //            TempData["Message"] = errorMessage;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        TempData["Message"] = "Failed to make your request: " + ex.Message;
+        //        return View(model);
+        //    }
+
+        //    return View(model);
+        //}
+
+        //public ActionResult MachineryRequestList()
+        //{
+        //    var model = requestService.GetPendingMachineryRequests();
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ApproveMachineryRequest(int requestId)
+        //{
+        //    string errorMessage;
+        //    if (requestService.UpdateMachineryRequestStatus(requestId, "Approved", out errorMessage))
+        //    {
+        //        TempData["Message"] = "Machinery request approved successfully.";
+        //    }
+        //    else
+        //    {
+        //        TempData["Message"] = errorMessage;
+        //    }
+
+        //    return RedirectToAction("MachineryRequestList", "Home");
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DenyMachineryRequest(int requestId)
+        //{
+        //    string errorMessage;
+        //    if (requestService.UpdateMachineryRequestStatus(requestId, "Denied", out errorMessage))
+        //    {
+        //        TempData["Message"] = "Machinery request denied successfully.";
+        //    }
+        //    else
+        //    {
+        //        TempData["Message"] = errorMessage;
+        //    }
+
+        //    return RedirectToAction("MachineryRequestList", "Home");
+        //}
+
+        //public ActionResult UserMachineries(int farmerId)
+        //{
+        //    var model = requestService.GetMachineryRequestsByFarmer(farmerId);
+        //    return View(model);
+        //}
     }
 }

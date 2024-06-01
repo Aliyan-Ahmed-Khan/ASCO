@@ -1,0 +1,40 @@
+﻿
+@model List<ASCO.Models.Farmer_Machinery_RS>
+
+@{
+    ViewBag.Title = "Your Machinery Requests";
+}
+
+<h2>Your Machinery Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Machinery Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            var machinery = request.Machinery;
+            <tr>
+                <td>@request.relationship_id</td>
+                <td>@machinery.machinery_type</td>
+                <td>@machinery.status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin-top: 20px;">
+    @Html.ActionLink("Back to Main Page", "UserPage", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}

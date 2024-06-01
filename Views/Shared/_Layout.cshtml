@@ -63,7 +63,7 @@
                 @if (Session["farmer_name"] != null)
                 {
                     <li class="nav-item"><span class="nav-text">Hello @Session["farmer_name"] </span></li>
-                    <li class="nav-item">@Html.ActionLink("Logout", "LogoutUser", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
                 }
             </ul>
         </div>
@@ -72,7 +72,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align: right;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
+            <p style="text-align: right; margin-top: 10px;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
         </footer>
     </div>
 

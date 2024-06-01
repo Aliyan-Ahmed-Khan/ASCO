@@ -11,6 +11,7 @@ namespace ASCO.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Machinery
     {
@@ -24,6 +25,7 @@ namespace ASCO.Models
         public string machinery_type { get; set; }
         public string machine_manufacturer { get; set; }
         public Nullable<int> machinery_quantity { get; set; }
+        public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Farmer_Machinery_RS> Farmer_Machinery_RS { get; set; }
