@@ -14,6 +14,14 @@ namespace ASCO.Controllers
 
         public LoanService loanService = new LoanService();
 
+        private UserSessionManager sessionManager = UserSessionManager.Instance;
+
+        public HomeController()
+        {
+            // Register observers
+            sessionManager.Attach(new LoggingObserver());
+        }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -375,14 +383,19 @@ namespace ASCO.Controllers
             if (string.IsNullOrWhiteSpace(f.farmer_password))
             {
                 ModelState.AddModelError("farmer_password", "Password cannot be empty.");
-
                 return View(f);
             }
-            var checkLogin = db.Farmers.Where(x => x.farmer_name.Equals(f.farmer_name) && x.farmer_password.Equals(f.farmer_password)).FirstOrDefault();
+
+            var checkLogin = db.Farmers.FirstOrDefault(x => x.farmer_name == f.farmer_name && x.farmer_password == f.farmer_password);
+
             if (checkLogin != null)
             {
-                Session["farmer_id"] = f.farmer_id.ToString();
-                Session["farmer_name"] = f.farmer_name.ToString();
+                Session["farmer_id"] = checkLogin.farmer_id.ToString();
+                Session["farmer_name"] = checkLogin.farmer_name;
+
+                // Register the session and notify observers
+                sessionManager.RegisterUserSession(checkLogin.farmer_id, Session.SessionID);
+
                 return RedirectToAction("UserPage", "Home");
             }
             else
@@ -396,6 +409,25 @@ namespace ASCO.Controllers
         {
             return View();
         }
+
+        public ActionResult UserLogout()
+        {
+            if (Session["farmer_id"] != null)
+            {
+                int farmerId = int.Parse(Session["farmer_id"].ToString());
+                sessionManager.UnregisterUserSession(farmerId);
+            }
+
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ActiveSessions()
+        {
+            var activeSessions = sessionManager.GetActiveSessions();
+            return View(activeSessions);
+        }
+
 
         public ActionResult RequestLoan()
         {

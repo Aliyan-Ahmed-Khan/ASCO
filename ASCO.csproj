@@ -173,10 +173,13 @@
     <Compile Include="Models\Fertilizer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IObserver.cs" />
+    <Compile Include="Models\ISubject.cs" />
     <Compile Include="Models\Loan.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoanRequestViewModel.cs" />
+    <Compile Include="Models\LoggingObserver.cs" />
     <Compile Include="Models\Machinery.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -190,6 +193,7 @@
     <Compile Include="Models\Tool.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserSessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LoanService.cs" />
     <Compile Include="Services\RequestService.cs" />
@@ -282,6 +286,7 @@
     <Content Include="Views\Home\RequestMachinery.cshtml" />
     <Content Include="Views\Home\MachineryRequestList.cshtml" />
     <Content Include="Views\Home\UserMachineries.cshtml" />
+    <Content Include="Views\Home\ActiveSessions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -52,20 +52,21 @@
             </style>
 
             <ul class="navbar-nav ml-auto">
-                @if (Session["admin_name"] != null)
+                @if (Session["admin_name"] != null || Session["farmer_name"] != null)
                 {
-                    <li class="nav-item"><span class="nav-text">Hello @Session["admin_name"] </span></li>
-                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                    if (Session["admin_name"] != null)
+                    {
+                        <li class="nav-item"><span class="nav-text">Hello @Session["admin_name"] </span></li>
+                        <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                    }
+                    else if (Session["farmer_name"] != null)
+                    {
+                        <li class="nav-item"><span class="nav-text">Hello @Session["farmer_name"] </span></li>
+                        <li class="nav-item">@Html.ActionLink("Logout", "UserLogout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
+                    }
                 }
             </ul>
 
-            <ul class="navbar-nav ml-auto">
-                @if (Session["farmer_name"] != null)
-                {
-                    <li class="nav-item"><span class="nav-text">Hello @Session["farmer_name"] </span></li>
-                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link custom-link" })</li>
-                }
-            </ul>
         </div>
     </nav>
     <div class="container body-content">

@@ -67,8 +67,8 @@ namespace ASCO.Services
         {
             var pendingLoans = db.Loans
                     .Join(db.Farmer_Loan_RS,
-                    loan => loan.loan_id,  // Assuming `Loan` table has a primary key `Id`
-                    flr => flr.loan_id,  // Assuming `Farmer_Loan_RS` table has a foreign key `LoanId`
+                    loan => loan.loan_id,
+                    flr => flr.loan_id,
                     (loan, flr) => new { Loan = loan, FarmerLoanRS = flr })
                     .Where(joined => joined.Loan.status == "Pending" && joined.FarmerLoanRS.farmer_id != null)
                     .Select(joined => joined.Loan)

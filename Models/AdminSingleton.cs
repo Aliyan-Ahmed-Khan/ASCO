@@ -7,7 +7,7 @@ namespace ASCO.Models
     {
         private static AdminSingleton _instance;
         private static readonly object _lock = new object();
-        private DBACSOEntities db = new DBACSOEntities(); // Replace with your actual DbContext
+        private DBACSOEntities db = new DBACSOEntities();
 
         // Track active sessions by admin ID
         private static ConcurrentDictionary<int, string> activeSessions = new ConcurrentDictionary<int, string>();
