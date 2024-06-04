@@ -24,6 +24,10 @@ namespace ASCO.Controllers
         [HttpGet]
         public ActionResult AdminLogin()
         {
+            if (Session["admin_id"] != null)
+            {
+                return RedirectToAction("AdminPage", "Home");
+            }
             return View();
         }
 
@@ -34,34 +38,58 @@ namespace ASCO.Controllers
             if (string.IsNullOrWhiteSpace(adm.admin_pass))
             {
                 ModelState.AddModelError("admin_pass", "Password cannot be empty.");
-
                 return View(adm);
             }
-            var checkLogin = db.Admins.Where(x => x.admin_name.Equals(adm.admin_name) && x.admin_pass.Equals(adm.admin_pass)).FirstOrDefault();
-            if (checkLogin != null)
+
+            var adminSingleton = AdminSingleton.Instance;
+            var validatedAdmin = adminSingleton.ValidateAdmin(adm.admin_name, adm.admin_pass);
+
+            if (validatedAdmin != null)
             {
-                Session["admin_id"] = adm.admin_id.ToString();
-                Session["admin_name"] = adm.admin_name.ToString();
+                // Check if the admin is already logged in
+                if (adminSingleton.IsAdminLoggedIn(validatedAdmin.admin_id))
+                {
+                    TempData["ErrorMessage"] = "This admin is already logged in from another session.";
+                    return View(adm);
+                }
+
+                // Register the session
+                Session["admin_id"] = validatedAdmin.admin_id.ToString();
+                Session["admin_name"] = validatedAdmin.admin_name;
+                adminSingleton.RegisterSession(validatedAdmin.admin_id, Session.SessionID);
+
                 return RedirectToAction("AdminPage", "Home");
             }
             else
             {
                 TempData["ErrorMessage"] = "Incorrect Credentials";
             }
+            return View(adm);
+        }
+
+        public ActionResult AdminPage()
+        {
+            if (Session["admin_id"] == null)
+            {
+                return RedirectToAction("AdminLogin", "Home");
+            }
+
             return View();
         }
 
         public ActionResult Logout()
         {
+            if (Session["admin_id"] != null)
+            {
+                var adminSingleton = AdminSingleton.Instance;
+                int adminId = int.Parse(Session["admin_id"].ToString());
+                adminSingleton.UnregisterSession(adminId);
+            }
+
             Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminLogin", "Home");
         }
 
-
-        public ActionResult AdminPage()
-        {
-            return View();
-        }
 
         public ActionResult ListFarmers()
         {
