@@ -3,7 +3,7 @@
     ViewBag.Title = "User Page";
 }
 
-<h2>Farmer Request Page</h2>
+<h2>Farmer Page</h2>
 
 
 <!DOCTYPE html>
@@ -32,14 +32,6 @@
             display: inline-block;
         }
 
-        .btn-primary {
-            background-color: #28a745;
-        }
-
-            .btn-primary:hover {
-                background-color: #218838;
-            }
-
         .btn-info {
             background-color: #17a2b8;
         }
@@ -54,8 +46,8 @@
         <h1>Welcome, @Session["farmer_name"]</h1>
         <p></p>
 
-        <div class="buttons">
-            <a href="@Url.Action("RequestLoan", "Home")" class="btn btn-primary">Request For Loan</a>
+        <div style ="margin-top: 550px;" class="buttons">
+            <a href="@Url.Action("RequestLoan", "Home")" class="btn btn-info">Request For Loan</a>
             @*<a href="@Url.Action("RequestMachinery", "Home")" class="btn btn-primary">Request for Machinery</a>*@
         </div>
     </div>

@@ -2,10 +2,10 @@
 @model List<ASCO.Models.Loan>
 
 @{
-    ViewBag.Title = "Your Loan Requests";
+    ViewBag.Title = "Your Loan Request";
 }
 
-<h2>Your Loan Requests</h2>
+<h2 style="margin-bottom: 20px; margin-top: 5px; ">Your Loan Request</h2>
 
 <table class="table">
     <thead>
@@ -28,7 +28,7 @@
 </table>
 
 
-<div style="margin-top: 20px;">
+<div style="margin-top: 25px;">
     @Html.ActionLink("Back to Main Page", "UserPage", null, new { @class = "btn btn-primary" })
 </div>
 

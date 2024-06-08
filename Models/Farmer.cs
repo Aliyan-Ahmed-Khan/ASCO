@@ -24,7 +24,8 @@ namespace ASCO.Models
             this.Farmer_Seed_RS = new HashSet<Farmer_Seed_RS>();
             this.Farmer_Tool_RS = new HashSet<Farmer_Tool_RS>();
         }
-    
+
+        [Display(Name = "Farmer ID")]    
         public int farmer_id { get; set; }
 
         [Required(ErrorMessage = "Username cannot be empty")]

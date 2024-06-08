@@ -23,7 +23,7 @@
         }
 
         .btn {
-            margin: 10px;
+            margin: 20px;
             padding: 10px 20px;
             text-decoration: none;
             color: white;
@@ -53,12 +53,11 @@
         <h1>Welcome, @Session["admin_name"]</h1>
         <p></p>
 
-        <div class="buttons">
+        <div style="margin-top: 450px;"class="buttons">
             <a href="@Url.Action("ListFarmers", "Home")" class="btn btn-primary">List of Farmers</a>
             <a href="@Url.Action("ListMachineries", "Home")" class="btn btn-primary">List of Machineries</a>
             <a href="@Url.Action("ListSeeds", "Home")" class="btn btn-primary">List of Seeds</a>
-            <a href="@Url.Action("RequestList", "Home")" class="btn btn-info">LoanRequest List</a>
-            @*<a href="@Url.Action("MachineryRequestList", "Home")" class="btn btn-info">MachineryRequest List</a>*@
+            <a href="@Url.Action("RequestList", "Home")" class="btn btn-primary">LoanRequest List</a>
         </div>
 
         <div class="buttons">

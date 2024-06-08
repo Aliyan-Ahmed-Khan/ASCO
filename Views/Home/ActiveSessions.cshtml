@@ -4,15 +4,60 @@
     ViewBag.Title = "Active Sessions";
 }
 
-<h2>Active Sessions</h2>
+<h2 style="margin-top: 10px; margin-bottom: 15px;">Active Sessions</h2>
 
-<ul>
-    @foreach (var session in Model)
-    {
-        <li>@session</li>
-    }
-</ul>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Session Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var session in Model)
+        {
+            <tr>
+                <td>@session </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-<div style="margin-top:15px; margin-bottom:15px">
+<div style="margin-top: 30px; margin-bottom:15px">
     @Html.ActionLink("Back to Main Page", "AdminPage", null, new { @class = "btn btn-primary" })
 </div>
+<style>
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+            .styled-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+            .styled-table tbody tr:hover {
+                background-color: darkcyan;
+                color: white;
+            }
+</style>
