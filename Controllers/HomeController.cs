@@ -10,6 +10,7 @@ namespace ASCO.Controllers
     public class HomeController : Controller
     {
         DBACSOEntities db = new DBACSOEntities();
+
         Models.DBACSOEntities entity = new DBACSOEntities();
 
         public LoanService loanService = new LoanService();
