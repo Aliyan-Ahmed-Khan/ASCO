@@ -72,13 +72,25 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p style="text-align: right; margin-top: 10px;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
-        </footer>
     </div>
+        <footer>
+            <p style="margin-right: 5px;">&copy; @DateTime.Now.Year - Project by Aliyan & Hira</p>
+        </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<style>
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: right;
+        
+        color: white;
+        padding: 10px;
+    }
+</style>
