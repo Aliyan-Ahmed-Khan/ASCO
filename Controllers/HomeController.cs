@@ -50,6 +50,13 @@ namespace ASCO.Controllers
                 return View(adm);
             }
 
+            // Validate the username for allowed characters
+            if (!System.Text.RegularExpressions.Regex.IsMatch(adm.admin_name, "^[a-zA-Z0-9_]*$"))
+            {
+                ModelState.AddModelError("admin_name", "Only alphanumerical characters and underscores are allowed.");
+                return View(adm);
+            }
+
             var adminSingleton = AdminSingleton.Instance;
             var validatedAdmin = adminSingleton.ValidateAdmin(adm.admin_name, adm.admin_pass);
 
@@ -116,6 +123,13 @@ namespace ASCO.Controllers
         {
             try
             {
+                // Check if the farmer_name already exists
+                if (db.Farmers.Any(f => f.farmer_name == farmer.farmer_name))
+                {
+                    TempData["Message"] = "Failed to create a user. The username already exists.";
+                    return View(farmer);
+                }
+
                 db.Farmers.Add(farmer);
                 db.SaveChanges();
                 TempData["Message"] = "A user for farmer was created succesfully";
@@ -384,6 +398,13 @@ namespace ASCO.Controllers
             if (string.IsNullOrWhiteSpace(f.farmer_password))
             {
                 ModelState.AddModelError("farmer_password", "Password cannot be empty.");
+                return View(f);
+            }
+
+            // Validate the username for allowed characters
+            if (!System.Text.RegularExpressions.Regex.IsMatch(f.farmer_name, "^[a-zA-Z0-9_]*$"))
+            {
+                ModelState.AddModelError("farmer_name", "Only alphanumerical characters and underscores are allowed.");
                 return View(f);
             }
 

@@ -31,7 +31,9 @@ namespace ASCO.Models
         [Required(ErrorMessage = "Username cannot be empty")]
         [Display(Name = "Username")]
         public string farmer_name { get; set; }
+        [Display(Name = "Address")]
         public string farmer_address { get; set; }
+        [Display(Name = "Contact")]
         public string farmer_contact { get; set; }
 
         [Required(ErrorMessage = "This field cannot be empty")]

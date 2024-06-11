@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.farmer_name, htmlAttributes: new { @class = "control-label col-md-12 text-center" })
             <div style="margin-left:75px;"class="col-md-12 text-center">
-                @Html.EditorFor(model => model.farmer_name, new { htmlAttributes = new { @class = "form-control custom-input" } })
+                @Html.EditorFor(model => model.farmer_name, new { htmlAttributes = new { @class = "form-control custom-input", oninput = "validateUsernameInput(event)" } })
                 @Html.ValidationMessageFor(model => model.farmer_name, "", new { @class = "text-danger text-center" })
             </div>
         </div>
@@ -129,3 +129,15 @@
         text-align: center;
     }
 </style>
+
+<script>
+    function validateUsernameInput(event) {
+        const input = event.target;
+        const regex = /^[a-zA-Z0-9_]*$/;
+        if (!regex.test(input.value)) {
+            input.setCustomValidity("Only alphanumerical characters and underscores are allowed.");
+        } else {
+            input.setCustomValidity("");
+        }
+    }
+</script>
